@@ -1,4 +1,257 @@
 
+var hijriMonthName;
+    var hDmY_x, hDmY_y, hDmY_z; 
+    function hDmY_formatDate(date) {
+    var hDmY_day = date.getDate();
+    var hDmY_month = date.getMonth() + 1;
+    var hDmY_year = date.getFullYear();
+    return (hDmY_day < 10 ? '0' : '') + hDmY_day + '-' + (hDmY_month < 10 ? '0' : '') + hDmY_month + '-' + hDmY_year;
+    }
+    var hDmY_today = new Date();
+    var hDmY_formattedDate = hDmY_formatDate(hDmY_today);
+    var hDmY_apiEndpoint = "https://api.aladhan.com/v1/gToH/" + hDmY_formattedDate;
+
+fetch(hDmY_apiEndpoint)
+    .then(function(response) {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(function(data) {
+        var hDmY_arabicDate = data.data.hijri.date;
+        var hDmY_dateParts = hDmY_arabicDate.split('-');
+        hDmY_x = (parseInt(hDmY_dateParts[0]) - 1).toLocaleString("bn-BD"); 
+        hDmY_y = parseInt(hDmY_dateParts[1]);
+        hDmY_z = parseInt(hDmY_dateParts[2]).toLocaleString("bn-BD").replace(/,/g, '');
+        
+        var hijriMonthNames = {
+            1: "মহররম",
+            2: "সফর",
+            3: "রবিউল আউয়াল",
+            4: "রবিউস সানি",
+            5: "জুমাদাল উলা",
+            6: "জুমাদাস সানি",
+            7: "রজব",
+            8: "শাবান",
+            9: "রমজান",
+            10: "শাওয়াল",
+            11: "জিলকদ",
+            12: "জিলহজ্জ"
+        };
+        
+        hijriMonthName = hijriMonthNames[hDmY_y];
+        
+        document.getElementById("dateall").textContent = hDmY_x + " " + hijriMonthName + " " + hDmY_z + " হিজরি";
+
+        hDmY_operations();
+    })
+    .catch(function(error) {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+
+
+    function hDmY_operations() {
+    var hDmY_sss = hDmY_x + hDmY_y + hDmY_z + hijriMonthName + lalaDays;
+
+// আপনি চাইলে রা, ঠা, ষ্ঠ, ম, য় ব্যবহার করতে পারেন
+const cdWsesMap = {
+    "১": "লা",
+    "২": "রা",
+    "৩": "রা",
+    "৪": "ঠা",
+    "৫": "ই",
+    "৬": "ই",
+    "৭": "ই",
+    "৮": "ই",
+    "৯": "ই",
+    "১০": "ই",
+    "১১": "ই",
+    "১২": "ই",
+    "১৩": "ই",
+    "১৪": "ই",
+    "১৫": "ই",
+    "১৬": "ই",
+    "১৭": "ই",
+    "১৮": "ই",
+    "১৯": "ই",
+    "২০": "শে",
+    "২১": "শে",
+    "২২": "শে",
+    "২৩": "শে",
+    "২৪": "শে",
+    "২৫": "শে",
+    "২৬": "শে",
+    "২৭": "শে",
+    "২৮": "শে",
+    "২৯": "শে",
+    "৩০": "শে",
+    "৩১": "শে"
+};
+
+var cdWses = cdWsesMap[currentBnDate];
+
+    var qwes; // Declare qwes outside the if-else statements
+
+if (currentBnMonth === "ফাল্গুন" || currentBnMonth === "চৈত্র") {
+    qwes = "বসন্তকাল";
+}
+else if (currentBnMonth === "বৈশাখ" || currentBnMonth === "জ্যৈষ্ঠ") {
+    qwes = "গ্রীষ্মকাল";
+}
+else if (currentBnMonth === "আষাঢ়" || currentBnMonth === "শ্রাবণ") {
+    qwes = "বর্ষাকাল";
+}
+else if (currentBnMonth === "ভাদ্র" || currentBnMonth === "আশ্বিন") {
+    qwes = "শরৎকাল";
+}
+else if (currentBnMonth === "কার্তিক" || currentBnMonth === "অগ্রহায়ন") {
+    qwes = "হেমন্তকাল";
+}
+else if (currentBnMonth === "পৌষ" || currentBnMonth === "মাঘ") {
+    qwes = "শীতকাল";
+}
+
+document.getElementById("dateall").innerHTML = "আজ " + lalaDays + " " + currentBnDate + cdWses + " " + currentBnMonth + " " + currentBnYear + " বঙ্গাব্দ, " + emNonts + " খ্রিষ্টাব্দ, " + hDmY_x + " " + hijriMonthName + " " + hDmY_z + " হিজরি, " + qwes;
+
+var tNcQ_canvas = document.getElementById("canvas");
+var tNcQ_ctx = tNcQ_canvas.getContext("2d");
+
+var tNcQ_colors = ["#0637bf", "#058055", "#87091e", "#2c0980", "#05060a"];
+
+function tNcQ_getRandomColor() {
+    var tNcQ_randomIndex = Math.floor(Math.random() * tNcQ_colors.length);
+    return tNcQ_colors[tNcQ_randomIndex];
+}
+
+var tNcQ_randomColor = tNcQ_getRandomColor();
+
+var tNcQ_xc = "আজ " + lalaDays + " " + currentBnDate + cdWses + " " + currentBnMonth + " " + currentBnYear + " বঙ্গাব্দ,\n" + emNonts + " খ্রিষ্টাব্দ,\n" + hDmY_x + " " + hijriMonthName + " " + hDmY_z + " হিজরি,\n" + "" + qwes;
+
+tNcQ_ctx.rect(0, 0, 600, 220);
+tNcQ_ctx.fillStyle = tNcQ_randomColor;
+tNcQ_ctx.fill();
+
+tNcQ_ctx.font = "30px SolaimanLipi";
+tNcQ_ctx.textAlign = "center";
+tNcQ_ctx.fillStyle = "#FFF";
+
+var lines = tNcQ_xc.split('\n');
+lines.forEach(function(line, index) {
+    tNcQ_ctx.fillText(line, 300, 60 + index * 40); // Adjust the Y position for each line
+});
+
+
+var tNcQ_dataUrl = tNcQ_canvas.toDataURL("image/webp");
+
+document.getElementById("iamloki").src = tNcQ_dataUrl;
+document.getElementById("iamloki").title = tNcQ_xc;
+document.getElementById("iamloki").alt = tNcQ_xc;
+
+document.getElementById("dTcaI").href = tNcQ_dataUrl;
+document.getElementById("dTcaI").setAttribute("download", tNcQ_xc);
+document.getElementById("dTcaI").title = tNcQ_xc;
+document.getElementById("dTcaI").alt = tNcQ_xc;
+
+var ajkerBanglaDate = currentBnDate;
+var ajkerBanglaDay = lalaDays;
+var ajkerBanglaYear = currentBnYear;
+var ajkerBanglaMonth = currentBnMonth;
+var ajkerBanglaRitu = qwes;
+
+
+var ajkerEnglishDateFull =  emNonts;
+// var ajkerEnglishYearFull = getEnFullYear;
+var ajkerArabicDate = hDmY_x;
+var ajkerArabicMonth = hijriMonthName;
+var ajkerArabicYear = hDmY_z;
+
+
+// Select all elements with the class name and update their text content
+document.querySelectorAll(".ajkerBanglaDate").forEach(function(element) {
+    element.textContent = ajkerBanglaDate;
+});
+
+document.querySelectorAll(".ajkerBanglaDay").forEach(function(element) {
+    element.textContent = ajkerBanglaDay;
+});
+
+document.querySelectorAll(".ajkerBanglaYear").forEach(function(element) {
+    element.textContent = ajkerBanglaYear;
+});
+
+document.querySelectorAll(".ajkerBanglaMonth").forEach(function(element) {
+    element.textContent = ajkerBanglaMonth;
+});
+
+document.querySelectorAll(".ajkerBanglaRitu").forEach(function(element) {
+    element.textContent = ajkerBanglaRitu;
+});
+
+document.querySelectorAll(".ajkerEnglishDateFull").forEach(function(element) {
+    element.textContent = ajkerEnglishDateFull;
+});
+
+document.querySelectorAll(".ajkerArabicDate").forEach(function(element) {
+    element.textContent = ajkerArabicDate;
+});
+
+document.querySelectorAll(".ajkerArabicMonth").forEach(function(element) {
+    element.textContent = ajkerArabicMonth;
+});
+
+document.querySelectorAll(".ajkerArabicYear").forEach(function(element) {
+    element.textContent = ajkerArabicYear;
+});
+
+document.querySelectorAll(".enDateInEnglish").forEach(function(element) {
+    element.textContent = enDateInEnglish;
+});
+
+document.querySelectorAll(".enDayInEnglish").forEach(function(element) {
+    element.textContent = enDayInEnglish;
+});
+
+document.querySelectorAll(".enMonthInEnglish").forEach(function(element) {
+    element.textContent = enMonthInEnglish;
+});
+
+document.querySelectorAll(".enYearInEnglish").forEach(function(element) {
+    element.textContent = enYearInEnglish;
+});
+
+document.querySelectorAll(".enDateInBangla").forEach(function(element) {
+    element.textContent = enDateInBangla;
+});
+
+document.querySelectorAll(".enDayInBangla").forEach(function(element) {
+    element.textContent = enDayInBangla;
+});
+
+document.querySelectorAll(".enMonthInBangla").forEach(function(element) {
+    element.textContent = enMonthInBangla;
+});
+
+document.querySelectorAll(".enYearInBangla").forEach(function(element) {
+    element.textContent = enYearInBangla;
+});
+
+
+var banglaKalText = document.querySelector('.ajkerBanglaRitu').textContent.trim().toLowerCase();
+document.querySelectorAll('.season-name').forEach(function(seasonName) {
+    var seasonNameText = seasonName.textContent.trim().toLowerCase();
+    if (seasonNameText.includes(banglaKalText)) {
+        seasonName.innerHTML += '<span class="currentbn-name text-sm text-red-600">(বর্তমান ঋতু)</span>';
+    }
+});
+ };
+
+
+
+
+
+
+
    (() => {
   let t_bnYearDiff = 594;
   let t_countAgain = 0;
@@ -863,6 +1116,107 @@ var emNonts;
                 qx_dateContainers[i].classList.add("activeDate");
             }
         };
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", async function() {
+    var thaEv_noibText = new Date().toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
+    document.querySelector('.todaysEngDate').textContent = thaEv_noibText;
+    try {
+        const response = await fetch("/feeds/pages/default/4081438458534932846?alt=json");
+        if (!response.ok) {
+            throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        const thaEv_content = data.entry.content.$t;
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = thaEv_content;
+        const thaEv_dateMeElements = tempDiv.querySelectorAll('.todays-date');
+        let thaEv_matchedDateContent = null;
+        thaEv_dateMeElements.forEach(element => {
+            if (element.textContent.trim() === thaEv_noibText) {
+                thaEv_matchedDateContent = element.closest('.todays-all-events').innerHTML;
+            }
+        });
+        // If matching content is found, display it
+        if (thaEv_matchedDateContent) {
+            document.getElementById('show_todays_events_and_holidays').innerHTML = thaEv_matchedDateContent;
+        } else {
+            // If no matching content found
+            // console.error("Database not found or does not match conditions.");
+        }
+    } catch (error) {
+        // Error handling
+        // console.error("Error fetching data:", error);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      const userIP = data.ip;
+      fetch(`https://ipapi.co/${userIP}/json/`)
+        .then(response => response.json())
+        .then(data => {
+          const userCountry = data.country_name;
+          if (userCountry === "India") {
+            document.getElementById("tab2").classList.add("active");
+          } else {
+            document.getElementById("tab1").classList.add("active");
+          }
+          updateActiveButton();
+        });
+    });
+
+
+document.getElementById('countrySelect').addEventListener('change', function() {
+  var tabId = this.value;
+  document.querySelectorAll('.tabcontent').forEach(function(element) {
+    element.classList.remove('active');
+  });
+  document.getElementById(tabId).classList.add('active');
+  updateActiveButton();
+});
+
+    
+function updateActiveButton() {
+  var activeTabId = document.querySelector('.tabcontent.active').id;
+  document.getElementById('countrySelect').value = activeTabId;
+};
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
