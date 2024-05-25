@@ -1,5 +1,5 @@
 
-var hijriMonthName;
+    var hijriMonthName;
     var hDmY_x, hDmY_y, hDmY_z; 
     function hDmY_formatDate(date) {
     var hDmY_day = date.getDate();
@@ -245,7 +245,6 @@ document.querySelectorAll('.season-name').forEach(function(seasonName) {
     }
 });
  };
-
 
 
 
